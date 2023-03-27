@@ -2,7 +2,7 @@ var http = require('http');
 var fs = require('fs');
 //const puppeteer = require('puppeteer');
 
-var index = fs.readFileSync('index.html');
+var index = fs.readFileSync('src/index.html');
 
 var SerialPort = require("serialport");
 
@@ -78,8 +78,8 @@ io.on('connection', function(socket) {
 });
 
 
-app.listen(3000, (data) => {
+app.listen(8080, (data) => {
     //console.log(data);
-    console.log('listening on *:3000');
+    console.log('listening on *:8080');
   });
 

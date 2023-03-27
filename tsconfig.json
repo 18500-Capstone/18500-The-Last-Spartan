@@ -7,5 +7,5 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src/**/*", "typedefs/*", "src/server_app.js"]
+  "include": ["src/**/*", "typedefs/*", "server_app.js"]
 }

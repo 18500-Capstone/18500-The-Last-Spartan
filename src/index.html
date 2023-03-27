@@ -3,17 +3,27 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'> </script>
   </head>
   <body>
-    
-    <button id="motorOn">Turn Motor On</button>
-    <button id="motorOff">Turn Motor Off</button>
-        
 
         <script>
         
             var socket = io();
 
+            document.addEventListener('keydown', (event) => { 
+              console.log(event); 
+              if (event.code === 'Space') {
+                socket.emit('motor', {status:"F"});
+              }
+              
+              else
+              {
+                socket.emit('motor', {status:"-"});
+              }
+            })
+
+            /*
             document.getElementById('motorOn').onclick = function() {
               socket.emit('motor', {status:"F"});
             };
@@ -21,6 +31,7 @@
             document.getElementById('motorOff').onclick = function() {
               socket.emit('motor', {status:"-"});
             };
+            */
 
         </script>
 
@@ -64,15 +75,15 @@
       </div>
       <div id="i">
         <div>
-          <div>Move : Betty</div>
-          <div>Attack : J</div>
-          <div>Block : K</div>
-          <div>Jump : SPACE</div>
-          <div>Pause : P</div>
+          <div>Move: L-Stick</div> 
+          <div>Attack: RT/RB</div>
+          <div>Block: LT/LB</div>
+          <div>Jump: A</div>
+          <div>Pause: Options</div>
         </div>
         <div>
-          <div>Spartan Charge : K + J</div>
-          <div>Ground Pound : SPACE + J</div>
+          <div>Spartan Charge: RT/RB + LT/LB</div>
+          <div>Ground Pound: A + RT/RB</div>
         </div>
       </div>
     </div>
