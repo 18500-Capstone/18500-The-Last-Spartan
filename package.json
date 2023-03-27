@@ -6,6 +6,11 @@
     "build": "webpack --mode production",
     "postbuild": "node postbuild.js"
   },
+  "dependencies": {
+    "puppeteer": "^19.7.5",
+    "serialport": "^9.0.1",
+    "socket.io": "^2.3.0"
+  },
   "devDependencies": {
     "archiver": "^5.0.0",
     "closure-webpack-plugin": "^2.3.0",

@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
+    
+    <button id="motorOn">Turn Motor On</button>
+    <button id="motorOff">Turn Motor Off</button>
+        
+
+        <script>
+        
+            var socket = io();
+
+            document.getElementById('motorOn').onclick = function() {
+              socket.emit('motor', {status:"F"});
+            };
+
+            document.getElementById('motorOff').onclick = function() {
+              socket.emit('motor', {status:"-"});
+            };
+
+        </script>
+
     <div id="w">
       <div id="w1">
         <canvas id="c"></canvas>
@@ -45,7 +64,7 @@
       </div>
       <div id="i">
         <div>
-          <div>Move : WASD</div>
+          <div>Move : Betty</div>
           <div>Attack : J</div>
           <div>Block : K</div>
           <div>Jump : SPACE</div>
