@@ -6,40 +6,246 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'> </script>
   </head>
   <body>
-
+   
         <script>
+
+          
+          window.__INITIAL_DATA__ = 
+          {
+            "hp" : "1000"
+          };
+
+          
+
+          //import HUD from './app/components/HUD';
+          //console.log(window.player_health.hp);
+
         
+          //var initialData = (window as any).__INITIAL_DATA__ as InitialData; 
+
+          //console.log(InitialData.hp);
+          
             var socket = io();
 
             document.addEventListener('keydown', (event) => { 
-              console.log(event); 
+              //console.log(event);
+              //console.log("HI!!!");
+
+              if (event.code === 'Space') 
+              {
+                socket.emit('motor', {status:"F"});
+              }
+
+              var low_health_elem = document.getElementById("Bethel_added").textContent;
+              var hit_time_elem = document.getElementById("me").textContent;
+              var L_S_hit_elem = document.getElementById("ok").textContent;
+              var is_hit = document.getElementById("red").textContent;
+
+
+              //console.log(is_hit);
+              //console.log(test);
+              //console.log(document.querySelector("Bethel_added"));
+              //console.log(this._hitResponseCounter); 
+              //console.log(this._damage); 
+
+              var low_health = parseInt(low_health_elem);
+              
+              if (low_health <= 25) 
+              {
+                socket.emit('motor', {status:"L"});
+                console.log("LOW HEALTH");
+              }
+
+              var hit_time = parseInt(hit_time_elem); 
+              var L_S_hit = parseInt(L_S_hit_elem);
+
+
+              if (hit_time > 0) 
+              {
+                console.log("hit_time");
+                console.log(hit_time);
+                console.log("L_S_hit");
+                console.log(L_S_hit);
+
+                // Small Hit
+                if ((L_S_hit === 7) && (low_health != 0)) 
+                {
+                  socket.emit('motor', {status:"A"});
+                  console.log("SMALL HIT");
+                }
+
+                // Large Hit
+                if ((L_S_hit === 24) && (low_health != 0)) 
+                {
+                  socket.emit('motor', {status:"B"});
+                  console.log("LARGE HIT");
+                }
+
+
+                if (low_health === 0)
+                {
+                  socket.emit('motor', {status:"0"});
+                  console.log("DEAD");
+                }
+
+                if (event.code === 'P')
+                {
+                  socket.emit('motor', {status:"0"});
+                  console.log("DEAD");
+                }
+                
+              }
+
+              else
+              {
+                  socket.emit('motor', {status:"0"});
+              }
+            });
+
+
+            /*
+            document.addEventListener('keydown', (event) => { 
+              //console.log(event);
+              //console.log("HI!!!");
+
+              var low_health_elem = document.getElementById("Bethel_added").textContent;
+              var hit_time_elem = document.getElementById("me").textContent;
+              var L_S_hit_elem = document.getElementById("ok").textContent;
+              //console.log(test);
+              //console.log(document.querySelector("Bethel_added"));
+              //console.log(this._hitResponseCounter); 
+              //console.log(this._damage); 
+
+              var low_health = parseInt(low_health_elem);
+              /*
+              if (low_health <= 25) 
+              {
+                socket.emit('motor', {status:"L"});
+                console.log("LOW HEALTH");
+              }
+              */
+            
+              /*
+              var hit_time = parseInt(hit_time_elem); 
+              var L_S_hit = parseInt(L_S_hit_elem);
+
+
+              if (hit_time !== 0) 
+              {
+                console.log("hit_time");
+                console.log(hit_time);
+                console.log("L_S_hit");
+                console.log(L_S_hit);
+
+                // Small Hit
+                if (L_S_hit === 7) 
+                {
+                  socket.emit('motor', {status:"A"});
+                  console.log("SMALL HIT");
+                }
+
+                // Large Hit
+                if (L_S_hit === 24) 
+                {
+                  socket.emit('motor', {status:"B"});
+                  console.log("LARGE HIT");
+                }
+                
+              }
+
+
+              // HITs
+              var prev = 0000; 
+              var curr = parseInt(low_health_elem);
+              var diff = prev - curr;
+
+              if (diff === 7)
+              {
+                console.log("SMALL HIT");
+              }
+              
+              else
+              {
+                //prev = curr;
+                //console.log("prev");
+                //console.log(prev);
+                //console.log("curr");
+                //console.log(curr);
+              }
+
+
               if (event.code === 'Space') {
                 socket.emit('motor', {status:"F"});
               }
               
               else
               {
-                socket.emit('motor', {status:"-"});
+                socket.emit('motor', {status:"0"});
               }
-            })
+            });
 
-            /*
-            document.getElementById('motorOn').onclick = function() {
-              socket.emit('motor', {status:"F"});
-            };
-
-            document.getElementById('motorOff').onclick = function() {
-              socket.emit('motor', {status:"-"});
-            };
             */
 
-        </script>
+            //var test = (document.getElementById("Bethel_added"));
+            //console.log("test.textContent");
+            //console.log(test.textContent);
+
+
+            
+           
+            
+            function test() {
+            //document.addEventListener('mouseover', (event) => { 
+              //console.log(event);
+              console.log("HI!!!");
+              console.log((document.getElementById("Bethel_added").textContent));
+              console.log(document.querySelector("Bethel_added"));
+
+            //});
+          }
+
+          //document.addEventListener('mouseover', test());
+            //setTimeout(test, 20000000);
+            /*
+
+            window.addEventListener("", () => {
+              var test = (document.getElementById("Bethel_added"));
+              console.log(test.textContent);
+            });
+
+     
+            var test = (document.getElementById("Bethel_added"));
+            //console.log(test.textContent);
+
+            document.getElementById("Bethel_added").addEventListener("change", () => {
+              console.log("HI!!!");
+              console.log(document.getElementById("Bethel_added"));
+            });
+            
+            for (let i = 0; i < 5; i++)
+            {
+              var id = "Bethel_added";
+              var test = (document.getElementById(id));
+              console.log("HI!!!");
+              console.log(test.textContent);
+            }
+            
+            */
+
+            (document.getElementById("Bethel_added").textContent).addEventListener("change", () => {
+              console.log("HI!!!");
+              console.log(document.getElementById("Bethel_added"));
+            });
+            
+          </script>
+
+       
 
     <div id="w">
       <div id="w1">
         <canvas id="c"></canvas>
         <div id="pz">
-          <div>[P] to Resume</div>
+          <div>[Options] to Resume</div>
         </div>
         <div id="gg">
           <div>
@@ -56,7 +262,7 @@
               <div id="s"></div>
             </div>
             <div id="sr"></div>
-            <div id="rty">[Enter] to Retry</div>
+            <div id="rty">[B] to Retry</div>
           </div>
         </div>
         <div id="tt">
@@ -68,7 +274,7 @@
             No retreat.<br />No surrender.<br />No way out alive.<br /><br />Go
             down swinging.
           </div>
-          <div id="t4">[Enter] to Start</div>
+          <div id="t4">[B] to Start</div>
 
           <div id="z">by @ferronsays</div>
         </div>
@@ -87,5 +293,10 @@
         </div>
       </div>
     </div>
+    <span id="Bethel_added" onchange = "test"></span>
+    <div id="me" onchange = "test"></div>
+    <div id="ok" onchange = "test"></div>
+    <div id="red" onchange = "test"></div>
+      
   </body>
 </html>

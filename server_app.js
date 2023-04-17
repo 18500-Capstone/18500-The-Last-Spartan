@@ -77,9 +77,109 @@ io.on('connection', function(socket) {
 
 });
 
+/*
+let request = require('request');
+
+request.post(
+    'http://capstonea8.wifi.local.cmu.edu', data, 
+    { json: { 'key': data.status } },
+    function (error, response, body, data) {
+        if (!error && response.statusCode == 200) {
+            console.log(body); 
+            console.log(response.body);
+            //console.log(error);
+            //console.log(data);
+        }
+    }
+);
+*/
+
+//const { WebSocketServer } = require('ws');
+
+//let socket = new WebSocket("ws://://capstonea8.wifi.local.cmu.edu", ["soap", "wamp"]);
+// var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+
+// const xhr = new XMLHttpRequest();
+
+// xhr.open("POST", "http://capstonea8.wifi.local.cmu.edu");
+// xhr.setRequestHeader("Content-Type", "HELLLLLLLLLO; charset=UTF-8, HEEEERRRREEEE, 123456789");
+
+// const body = JSON.stringify({
+//   userId: 1,
+//   title: "HEEEEEELLLLLLOOOOOOOOOO",
+//   completed: false
+// });
+// xhr.onload = () => {
+//   if (xhr.readyState == 4 && xhr.status == 201) {
+//     console.log(JSON.parse(xhr.responseText));
+//   } else {
+//     console.log(`Error: ${xhr.status}`);
+//   }
+// };
+// xhr.send(body);
+
+
+
+
+
+//const http = require('node:http');
+
+// var datatosend = app.data;
+
+// var urlparams = { 
+//     host: 'capstonea8.wifi.local.cmu.edu',
+//     //path: '/L',
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/json',
+//         'Data' : datatosend,
+//     },  
+// };
+
+// function SendRequest(datatosend) {
+//     function OnResponse(response) {
+//         var data = '';
+
+//         response.on('data', function(chunk) {
+//             data += chunk; //Append each chunk of data received to this variable.
+//         });
+//         response.on('end', function() {
+//             console.log(data); //Display the server's response, if any.
+//         });
+//     }
+
+//     var request = http.request(urlparams, OnResponse); //Create a request object.
+
+//     request.write(datatosend); //Send off the request.
+//     request.end(); //End the request.
+// }
+
+// SendRequest("{testfield: 'Boop'"); //Execute the function the request is in.
+
+
+
+
+/*
+var socket = io.connect('http://capstonea8.wifi.local.cmu.edu');
+
+socket.on('connect', function(){
+    try {
+        console.log('socket connect');
+        socket.emit('configure', {status:"?1000"});
+    } catch(e) {
+        console.log(e);
+    }
+});
+socket.emit({status:"?1000"});*/
+
+//socket.send(msg[, offset, length][, port][, 'http://capstonea8.wifi.local.cmu.edu'][, callback]);
+
+//socket.emit('motor', {status:"?1000"}
 
 app.listen(8080, (data) => {
-    //console.log(data);
+    console.log(data);
+
     console.log('listening on *:8080');
+
   });
 

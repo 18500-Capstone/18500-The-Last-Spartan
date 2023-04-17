@@ -222,6 +222,9 @@ class Hoplite extends GameObject {
     this._zv += special ? 5 : 3;
     this._hp = Math.max(0, this._hp - hpDiff);
 
+    document.getElementById("ok").innerHTML = hpDiff;
+    //console.log(hpDiff);
+
     if (this._hp === 0) {
       from._kills += 1;
     }
@@ -229,6 +232,9 @@ class Hoplite extends GameObject {
     this._hitResponseCounter = 200;
 
     this._stunDelayCounter += alt ? 2000 : special ? 1200 : 0;
+
+    //console.log("this._stunDelayCounter");
+    //console.log(this._hp);
 
     sfx(
       hpDiff
@@ -429,6 +435,12 @@ class Hoplite extends GameObject {
         Math.sin(this._stunDelayCounter * 0.02) > 0 ? "#1520a6" : colorOverride;
 
       var bodyColor = colorOverride || "#E0AC69";
+
+      
+      //document.getElementById("red").innerHTML = this._hitResponseCounter > 0 ? "#fff" : undefined;;
+      //console.log(document.getElementById("red").innerHTML);
+      //console.log(colorOverride);
+
 
       var anim = this._currentAnim._current;
 

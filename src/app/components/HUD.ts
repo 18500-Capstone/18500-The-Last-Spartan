@@ -3,6 +3,17 @@ import V2 from "../core/V2";
 import HopliteHead from "./entities/HopliteHead";
 import { WIDTH } from "../constants";
 
+type InitialData = {
+  hp : string; 
+};
+
+declare const window: any;
+
+
+var initialData = (window as any).__INITIAL_DATA__ as InitialData; 
+
+//console.log(hp);
+
 class HUD extends GameObject {
   public _player: any;
   public _headIcon: HopliteHead;
@@ -39,6 +50,34 @@ class HUD extends GameObject {
     ctx._fillStyle("#d11141");
     ctx._fillRect(10, 10, (this._player._hp / this._player._maxHp) * 200, 20);
 
+    // var Player_Health = 
+    // {
+    //   hp: this._player._hp
+    // };
+
+    // declare global {
+    //   var Player_Health : this._player._hp;
+    // }
+    
+    // var P_Health = window.Player_Health;
+    
+    // console.log(window.Player_Health);
+
+    // initialData.hp = this._player._hp;
+    
+    window.player_health = 
+    {
+      "hp" : this._player._hp
+    };
+    //console.log(window.player_health.hp);
+
+    document.getElementById('Bethel_added').textContent = this._player._hp;
+
+
+
+    //export{ Player_Health };
+    //console.log(this._player._hp);
+
     // stamina
     ctx._fillStyle("#00aedb");
     ctx._fillRect(10, 35, (this._player._stamina / 100) * 200, 10);
@@ -56,3 +95,4 @@ class HUD extends GameObject {
 }
 
 export default HUD;
+

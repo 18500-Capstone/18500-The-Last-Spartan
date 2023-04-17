@@ -57,6 +57,8 @@ class Leonidus extends Hoplite {
 
       enemiesToDamage.forEach((enemy) => {
         enemy._object._hitBy(this, false, true);
+        //console.log("HHHEEEERRRRREEEEEEEEE");
+        //console.log(enemy._object._hitBy(this, false, true));
       });
 
       Game._scene._cam._shake = 100;
@@ -169,6 +171,9 @@ class Leonidus extends Hoplite {
       }
     });
 
+    console.log("enemiesToDamage");
+    console.log(enemiesToDamage);
+
     this._altAttackDelayCounter = this._altAttackDelay;
   }
 
@@ -186,6 +191,14 @@ class Leonidus extends Hoplite {
     }
 
     var isBashing = this._currentAnim === this._altAttackAnim;
+
+    //console.log(isBashing);
+
+    //console.log(this._hitResponseCounter);
+
+    document.getElementById('me').innerHTML = (this._hitResponseCounter).toString();
+
+    //console.log(this._healDelayCounter); 
 
     if (!isBashing) {
       if (InputController._KeyW) {
