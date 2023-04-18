@@ -4,24 +4,24 @@ var fs = require('fs');
 
 var index = fs.readFileSync('src/index.html');
 
-var SerialPort = require("serialport");
+// var SerialPort = require("serialport");
 
 
-const parsers = SerialPort.parsers;
-const parser = new parsers.Readline({
-    delimiter: '\r\n'
-});
+// const parsers = SerialPort.parsers;
+// const parser = new parsers.Readline({
+//     delimiter: '\r\n'
+// });
 
 
-var port = new SerialPort('COM5', {
-    baudRate: 9600,
-    dataBits: 8,
-    parity: 'none',
-    stopBits: 1,
-    flowControl: false
-});
+// var port = new SerialPort('COM5', {
+//     baudRate: 9600,
+//     dataBits: 8,
+//     parity: 'none',
+//     stopBits: 1,
+//     flowControl: false
+// });
 
-port.pipe(parser);
+// port.pipe(parser);
 
 
 /*
@@ -57,25 +57,73 @@ start()
 */
 
 
-var app = http.createServer(function(req, res) {
+// var app = http.createServer(function(req, res) {
     
-    res.writeHead(200, {'Content-Type':'text/html'});
-    res.end(index);
+//     res.writeHead(200, {'Content-Type':'text/html'});
+//     res.end(index);
 
-});
+// });
 
 
-var io = require('socket.io').listen(app);
+// var io = require('socket.io').listen(app);
 
-io.on('connection', function(socket) {
+// io.on('connection', function(socket) {
 
-    socket.on('motor', function(data) {
-        
-        port.write(data.status);
-        console.log(data);
-    });
+//     socket.on('motor', function(data) {
 
-});
+//         port.write("100,100,100");
+//         //port.write(data.status);
+//         console.log(data);
+//     });
+
+// });
+
+
+//serial port initialization:
+var SerialPort = require('serialport'); // include the serialport library
+var portName = '\\\\.\\COM5'; // get the port name from the command line
+var myPort = new SerialPort(portName, 9600);// open the port
+ 
+// these are the definitions for the serial events:
+myPort.on('open', openPort); // called when the serial port opens
+ 
+function openPort() {
+  var brightness = "1234\n"; // the brightness to send for the LED
+  console.log('port open');
+  //console.log('baud rate: ' + myPort.options.baudRate);
+  //var brightness2 = "5678\n";
+  // since you only send data when the port is open, this function
+  // is local to the openPort() function:
+  function sendData() {
+    // convert the value to an ASCII string before sending it
+    myPort.write(brightness.toString());
+    console.log('Sending ' + brightness + ' out the serial port');
+    if(brightness == "1234\n"){
+        brightness = "5678\n";
+    }
+    else  if(brightness == "5678\n"){
+        brightness = "9000\n";
+    }
+    else if(brightness = "9000\n"){
+        brightness = "1234\n";
+    }
+}
+ 
+// set an interval to update the brightness 2 times per second:
+//var array1 = ["1234\n", "5678\n", "9000\n", "1234\n"];
+
+setInterval(sendData, 250);
+}
+
+
+// let serialport = require('serialport');
+ 
+// // list serial ports:
+// serialport.list().then (
+//   ports => ports.forEach(port =>console.log(port.path)),
+//   err => console.log(err)
+// )
+
 
 /*
 let request = require('request');
@@ -176,10 +224,22 @@ socket.emit({status:"?1000"});*/
 
 //socket.emit('motor', {status:"?1000"}
 
-app.listen(8080, (data) => {
-    console.log(data);
+// app.listen(8080, (data) => {
+//     console.log(data);
 
-    console.log('listening on *:8080');
+//     console.log('listening on *:8080');
 
-  });
+//   });
 
+// var SerialPort = require("serialport").SerialPort;
+
+// var serialPort = new SerialPort('\\\\.\\COM5', {baudrate: 9600}, true);
+
+
+// serialPort.on ('open', function () {
+//     console.log("Open");
+//     serialPort.write(0x05);
+//     serialPort.on ('data', function( data ) {
+//         console.log("data" + data.toString());
+//     });
+// });

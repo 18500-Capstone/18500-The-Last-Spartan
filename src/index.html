@@ -9,13 +9,24 @@
    
         <script>
 
+          window.width = 
+          {
+            "width" : "0"
+          };
           
           window.__INITIAL_DATA__ = 
           {
             "hp" : "1000"
           };
 
-          
+
+          let widthPass = 0;
+
+//document.addEventListener('mouseover', (event) => { });
+
+//console.log("WidthPass");
+//console.log((widthPass));
+//console.log((widthPass).toString());
 
           //import HUD from './app/components/HUD';
           //console.log(window.player_health.hp);
@@ -33,7 +44,7 @@
 
               if (event.code === 'Space') 
               {
-                socket.emit('motor', {status:"F"});
+                socket.emit('motor', {status:"?1000,"+ low_health_elem +",100\n"});
               }
 
               var low_health_elem = document.getElementById("Bethel_added").textContent;
@@ -47,12 +58,15 @@
               //console.log(document.querySelector("Bethel_added"));
               //console.log(this._hitResponseCounter); 
               //console.log(this._damage); 
+            
+              //console.log()
 
               var low_health = parseInt(low_health_elem);
+              var low_health_str = ((parseInt(low_health_elem)).toFixed()).toString();
               
-              if (low_health <= 25) 
+              if (low_health <= 50) 
               {
-                socket.emit('motor', {status:"L"});
+                socket.emit('motor', {status:"0001,"+ low_health_elem +",100\n"});
                 console.log("LOW HEALTH");
               }
 
@@ -70,27 +84,27 @@
                 // Small Hit
                 if ((L_S_hit === 7) && (low_health != 0)) 
                 {
-                  socket.emit('motor', {status:"A"});
+                  socket.emit('motor', {status:"0100,"+ low_health_str +",100\n"});
                   console.log("SMALL HIT");
                 }
 
                 // Large Hit
                 if ((L_S_hit === 24) && (low_health != 0)) 
                 {
-                  socket.emit('motor', {status:"B"});
+                  socket.emit('motor', {status:"0010,"+ low_health_str +",100\n"});
                   console.log("LARGE HIT");
                 }
 
 
                 if (low_health === 0)
                 {
-                  socket.emit('motor', {status:"0"});
+                  socket.emit('motor', {status:"0000,0,0\n"});
                   console.log("DEAD");
                 }
 
                 if (event.code === 'P')
                 {
-                  socket.emit('motor', {status:"0"});
+                  socket.emit('motor', {status:"0000,"+ low_health_str +",0\n"});
                   console.log("DEAD");
                 }
                 
@@ -98,7 +112,7 @@
 
               else
               {
-                  socket.emit('motor', {status:"0"});
+                  socket.emit('motor', {status:"0000,"+ low_health_str +",0\n"});
               }
             });
 
@@ -297,6 +311,22 @@
     <div id="me" onchange = "test"></div>
     <div id="ok" onchange = "test"></div>
     <div id="red" onchange = "test"></div>
+
+    <div id="progressbar" class="progress" style="--progress: var(--mouse-x, 10)">
+      <div class="wrapper">
+        <div class="tooltip-container">
+          <div class="tooltip">
+            <span class="number" id="number" data-number="10%"></span>
+            <div class="tooltip-indicator"></div>
+          </div>
+          
+        </div>
+        <div class="bar">
+          
+        </div>
+        
+      </div>
+    </div>
       
   </body>
 </html>
