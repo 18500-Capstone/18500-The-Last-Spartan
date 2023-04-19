@@ -98,21 +98,21 @@ function openPort() {
     // convert the value to an ASCII string before sending it
     myPort.write(brightness.toString());
     console.log('Sending ' + brightness + ' out the serial port');
-    if(brightness == "1234\n"){
-        brightness = "5678\n";
+    if(brightness == "?1000,87,40\n"){
+        brightness = "?0001,32,100\n";
     }
-    else  if(brightness == "5678\n"){
-        brightness = "9000\n";
+    else  if(brightness == "?0001,32,100\n"){
+        brightness = "?0000,20,0\n";
     }
-    else if(brightness = "9000\n"){
-        brightness = "1234\n";
+    else if(brightness ="?0000,20,0\n"){
+        brightness = "?1000,87,40\n";
     }
 }
  
 // set an interval to update the brightness 2 times per second:
 //var array1 = ["1234\n", "5678\n", "9000\n", "1234\n"];
 
-setInterval(sendData, 250);
+setInterval(sendData, 1000);
 }
 
 
