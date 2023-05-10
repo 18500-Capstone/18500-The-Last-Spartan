@@ -11,21 +11,12 @@ import './app/components/entities/Hoplite';
 
 //console.log(Leonidus);
 
-const width = document.body.offsetWidth;
-const height = document.body.offsetHeight;
+document.getElementById("Bethel_added").style.color = "#68a5a0"; // zero is not invisible
+document.getElementById("me").style.color = "#68a5a0";
+document.getElementById("ok").style.color = "#68a5a0";
+document.getElementById("red").style.color = "#68a5a0";
 
-document.body.addEventListener('mousemove', function(e) {
-    const relativeWidth = e.clientX / width * 100;
-    const relativeHeight = e.clientY / height * 100;
-    document.body.style.setProperty('--mouse-x', relativeWidth);
-    document.body.style.setProperty('--mouse-y', relativeHeight);
-  
-    number.dataset.number = parseInt(relativeWidth) + '%';
 
-    //widthPass = relativeWidth;
-          //console.log("relativeWidth");
-          //console.log(relativeWidth.toFixed());
-});
 
 
 

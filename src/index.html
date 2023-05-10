@@ -19,8 +19,33 @@
             "hp" : "1000"
           };
 
+          const width = document.body.offsetWidth;
+          const height = document.body.offsetHeight;
 
-          let widthPass = 0;
+   document.body.addEventListener('mousemove', function(e) {
+    const relativeWidth = e.clientX / width * 100;
+    const relativeHeight = e.clientY / height * 100;
+    document.body.style.setProperty('--mouse-x', relativeWidth);
+    document.body.style.setProperty('--mouse-y', relativeHeight);
+  
+    number.dataset.number = parseInt(relativeWidth) + '%';
+
+    window.relativeWidth = relativeWidth;
+
+    //widthPass = relativeWidth;
+          //console.log("relativeWidth");
+
+//     window.relativeWidth = 
+//     {
+//       "width" : (relativeWidth.toFixed()).toString()
+//     };
+          
+          //console.log(relativeWidth.toFixed());
+
+
+});
+
+          //let widthPass = 0;
 
 //document.addEventListener('mouseover', (event) => { });
 
@@ -31,48 +56,128 @@
           //import HUD from './app/components/HUD';
           //console.log(window.player_health.hp);
 
-        
+    //var rWidth = 1000;
+    /*
+    window.relativeWidth = 
+    {
+      "width" : "0"
+    };   
           //var initialData = (window as any).__INITIAL_DATA__ as InitialData; 
 
           //console.log(InitialData.hp);
+
+          //document.getElementById("Bethel_added").style.color = "#5D7582";
+            //document.getElementById("Bethel_added").style.color = "#68a5a0";
+    var width = document.body.offsetWidth;
+    var height = document.body.offsetHeight;
+    var rWidth = "1000";
+
+    function barNum(e) {
+      const relativeWidth = e.clientX / width * 100;
+      const relativeHeight = e.clientY / height * 100;
+      document.body.style.setProperty('--mouse-x', relativeWidth);
+      document.body.style.setProperty('--mouse-y', relativeHeight);
+  
+      number.dataset.number = parseInt(relativeWidth) + '%';
+
+      rWidth = relativeWidth;
+      //console.log(rWidth);
+
+      //console.log(number.dataset.number);
+
+    }
+
+    function getRelativeWidth(w)
+    {
+      return ((w.toFixed()).toString());
+    }
+
+
+    document.body.addEventListener('mousemove', function (e) {
+      const relativeWidth = e.clientX / width * 100;
+      const relativeHeight = e.clientY / height * 100;
+      document.body.style.setProperty('--mouse-x', relativeWidth);
+      document.body.style.setProperty('--mouse-y', relativeHeight);
+  
+      number.dataset.number = parseInt(relativeWidth) + '%';
+
+      rWidth = getRelativeWidth(rWidth);
+      console.log(rWidth);
+
+      //console.log(number.dataset.number);
+      //getRelativeWidth(rWidth);
+
+    });
+    //widthPass = relativeWidth;
+    
+    */
+    
+    //rWidth = (relativeWidth.toFixed()).toString();
+    //console.log(rWidth.toFixed());
+    /*
+    {
+      "width" : (relativeWidth.toFixed()).toString()
+    };    
+    */
+    //console.log(relativeWidth.toFixed());
+
+    //rWidth = relativeWidth.toFixed();
+
+
+//});   
+
+
+            //console.log("hereee!");
+
+            //console.log(window.rWidth);
+
+            //console.log(document.getElementById("number").innerHTML);
+
+          
           
             var socket = io();
+
+            //console.log((window.relativeWidth).toFixed().toString());
 
             document.addEventListener('keydown', (event) => { 
               //console.log(event);
               //console.log("HI!!!");
-
-              if (event.code === 'Space') 
-              {
-                socket.emit('motor', {status:"?1000,"+ low_health_elem +",100\n"});
-              }
 
               var low_health_elem = document.getElementById("Bethel_added").textContent;
               var hit_time_elem = document.getElementById("me").textContent;
               var L_S_hit_elem = document.getElementById("ok").textContent;
               var is_hit = document.getElementById("red").textContent;
 
+              var low_health = parseInt(low_health_elem);
+              var low_health_str = ((parseInt(low_health_elem)).toFixed()).toString();
+              //var rWidth = 
 
-              //console.log(is_hit);
+              if (event.code === 'Space') 
+              {
+                socket.emit('motor', {status:"?1000,"+ low_health_str + "," + motor_intensity_level + "\n"});
+              }
+
+
+              //console.log(is_hit);getRelativeWidth
               //console.log(test);
               //console.log(document.querySelector("Bethel_added"));
               //console.log(this._hitResponseCounter); 
               //console.log(this._damage); 
             
-              //console.log()
-
-              var low_health = parseInt(low_health_elem);
-              var low_health_str = ((parseInt(low_health_elem)).toFixed()).toString();
+            
               
-              if (low_health <= 50) 
-              {
-                socket.emit('motor', {status:"0001,"+ low_health_elem +",100\n"});
-                console.log("LOW HEALTH");
-              }
 
               var hit_time = parseInt(hit_time_elem); 
               var L_S_hit = parseInt(L_S_hit_elem);
 
+              //console.log((window.relativeWidth).toFixed().toString());
+              motor_intensity_level = window.relativeWidth.toFixed().toString();
+
+              if (low_health <= 50) 
+              {
+                socket.emit('motor', {status:"?0001,"+ low_health_str + "," + motor_intensity_level + "\n"});
+                console.log("LOW HEALTH");
+              }
 
               if (hit_time > 0) 
               {
@@ -84,27 +189,27 @@
                 // Small Hit
                 if ((L_S_hit === 7) && (low_health != 0)) 
                 {
-                  socket.emit('motor', {status:"0100,"+ low_health_str +",100\n"});
+                  socket.emit('motor', {status:"?0100,"+ low_health_str + "," + motor_intensity_level + "\n"});
                   console.log("SMALL HIT");
                 }
 
                 // Large Hit
                 if ((L_S_hit === 24) && (low_health != 0)) 
                 {
-                  socket.emit('motor', {status:"0010,"+ low_health_str +",100\n"});
+                  socket.emit('motor', {status:"?0010,"+ low_health_str + "," + motor_intensity_level + "\n"});
                   console.log("LARGE HIT");
                 }
 
 
                 if (low_health === 0)
                 {
-                  socket.emit('motor', {status:"0000,0,0\n"});
+                  socket.emit('motor', {status:"?0000,0" + "," + motor_intensity_level + "\n"});
                   console.log("DEAD");
                 }
 
                 if (event.code === 'P')
                 {
-                  socket.emit('motor', {status:"0000,"+ low_health_str +",0\n"});
+                  socket.emit('motor', {status:"?0000,"+ low_health_str + "," + motor_intensity_level + "\n"});
                   console.log("DEAD");
                 }
                 
@@ -112,10 +217,9 @@
 
               else
               {
-                  socket.emit('motor', {status:"0000,"+ low_health_str +",0\n"});
+                  socket.emit('motor', {status:"?0000,"+ low_health_str + "," + motor_intensity_level + "\n"});
               }
             });
-
 
             /*
             document.addEventListener('keydown', (event) => { 
@@ -206,7 +310,7 @@
 
 
             
-           
+          /* 
             
             function test() {
             //document.addEventListener('mouseover', (event) => { 
@@ -216,7 +320,7 @@
               console.log(document.querySelector("Bethel_added"));
 
             //});
-          }
+          }*/
 
           //document.addEventListener('mouseover', test());
             //setTimeout(test, 20000000);
@@ -246,10 +350,13 @@
             
             */
 
+            /*
             (document.getElementById("Bethel_added").textContent).addEventListener("change", () => {
               console.log("HI!!!");
               console.log(document.getElementById("Bethel_added"));
             });
+
+            */
             
           </script>
 
@@ -308,7 +415,7 @@
       </div>
     </div>
     <span id="Bethel_added" onchange = "test"></span>
-    <div id="me" onchange = "test"></div>
+    <div id="me" onchange = "test"></div> 
     <div id="ok" onchange = "test"></div>
     <div id="red" onchange = "test"></div>
 
